@@ -1,24 +1,50 @@
-# README
+# FURIMA-42236のテーブル設計（ER図）
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## users テーブル
+| Column              | Type       | Options                         |
+| ------------------  | ---------- | ------------------------------- |
+| nickname	          | string     |	null: false,       | 
+| email               | string     |	null: false, unique: true      | 
+| encrypted_password  | string     |	null: false                    |
+| last_name           | string     |  null: false                    |
+| first_name          | string     |  null: false                    |
+| last_name_kana      | string     |  null: false                    |
+| first_name_kana	    | string     |  null: false                    |
+| birthday            | date       |  null: false                    |
 
-Things you may want to cover:
+### Association
+- has_many :items
+- has_many :orders
 
-* Ruby version
 
-* System dependencies
+## itemsテーブル
+| Column             | Type       | Options                         |
+| ------------------ | ---------- | ------------------------------- |
+| name	             | string     |	null: false                     |
+| description        | text       |	null: false                     |
+| category	         | string     |	null: false                     |
+| shipping_info	     | string     |	null: false                     |
+| price	             | integer    |	null: false                     |
+| image              | string     |	null: false                     |
+| user_id	           | integer    |	null: false                     |
+| timestamps         | datetime   |	null: false                     |
 
-* Configuration
+### Association
+- belongs_to :user
+- has_oen :order
 
-* Database creation
 
-* Database initialization
+## ordersテーブル
+| Column             | Type       | Options                         |
+| ------------------ | ---------- | ------------------------------- |
+| postal_code        | string     |	null: false                     |
+| address	           | string   	| null: false                     |
+| phone_number	     | string	    | null: false                     |
+| user_id            | integer    |	null: false                     |
+| item_id            | integer    |	null: false                     |
+| timestamps         | datetime   |	null: false                     |
 
-* How to run the test suite
+### Association
+- belongs_to :user
+- belongs_to :item
 
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
