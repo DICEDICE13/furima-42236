@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :user do
-    nickname              { 'テスト' }  # ← ✅ 6文字以内に修正（例：3文字）
+    nickname              { 'テスト' } 
     email                 { Faker::Internet.unique.email }
     password              { 'password123' }
     password_confirmation { 'password123' }
