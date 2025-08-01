@@ -12,16 +12,17 @@ class User < ApplicationRecord
 
   # 名前（全角）バリデーション
   validates :last_name,  presence: true,
-                         format: { with: /\A[ぁ-んァ-ン一-龥々ーヶ]+\z/, message: 'は全角（漢字・ひらがな・カタカナ）で入力してください' }
+                         format: { with: /\A[ぁ-んァ-ヶ一-龥々ー]+\z/, message: 'は全角（漢字・ひらがな・カタカナ）で入力してください' }
   validates :first_name, presence: true,
-                         format: { with: /\A[ぁ-んァ-ン一-龥々ーヶ]+\z/, message: 'は全角（漢字・ひらがな・カタカナ）で入力してください' }
+                         format: { with: /\A[ぁ-んァ-ヶ一-龥々ー]+\z/, message: 'は全角（漢字・ひらがな・カタカナ）で入力してください' }
 
   # 名前カナ（全角カタカナ）バリデーション
   validates :last_name_kana,  presence: true,
-                              format: { with: /\A[ァ-ンーヶ]+\z/, message: 'は全角カタカナで入力してください' }
+                              format: { with: /\A[ァ-ヶー]+\z/, message: 'は全角カタカナで入力してください' }
   validates :first_name_kana, presence: true,
-                              format: { with: /\A[ァ-ンーヶ]+\z/, message: 'は全角カタカナで入力してください' }
+                              format: { with: /\A[ァ-ヶー]+\z/, message: 'は全角カタカナで入力してください' }
 
   
 
 end
+
