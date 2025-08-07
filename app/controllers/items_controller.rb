@@ -23,7 +23,7 @@ class ItemsController < ApplicationController
       redirect_to root_path, notice: '出品が完了しました'
     else
       set_select_options
-      render :new
+      render :new, status: :unprocessable_entity
     end
   end
 
