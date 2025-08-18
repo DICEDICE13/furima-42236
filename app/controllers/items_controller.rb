@@ -2,13 +2,13 @@ class ItemsController < ApplicationController
 
   before_action :authenticate_user!, only: [:new, :create]
 
-  def index
-    @items = Item.all
-  end
+  # def index
+  #   @items = Item.all
+  # end
 
-  def show
-    @item = Item.find(params[:id])
-  end
+  # def show
+  #   @item = Item.find(params[:id])
+  # end
 
   def new
     @item = Item.new
@@ -27,9 +27,9 @@ class ItemsController < ApplicationController
     end
   end
 
-  def edit
-    @item = Item.find(params[:id])
-  end
+  # def edit
+  #   @item = Item.find(params[:id])
+  # end
 
   
 
