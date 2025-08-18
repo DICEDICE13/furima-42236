@@ -1,4 +1,14 @@
-describe '商品出品機能' do
+require 'rails_helper'
+
+RSpec.describe '商品出品機能', type: :model do
+  before do
+    # ユーザーも作成しておく
+    @user = FactoryBot.create(:user)
+    # @item を生成
+    @item = FactoryBot.build(:item, user: @user)
+  end
+
+
   context '出品できるとき' do
     it 'すべての項目が適切に入力されていれば出品できる' do
       expect(@item).to be_valid
@@ -71,11 +81,11 @@ describe '商品出品機能' do
       expect(@item.errors.full_messages).to include("Prefecture must be other than 1")
     end
 
-    it 'scheduled_delivery_idが1（---）では出品できない' do
-      @item.scheduled_delivery_id = 1
-      @item.valid?
-      expect(@item.errors.full_messages).to include("Scheduled delivery must be other than 1")
-    end
+    it 'delivery_day_idが1（---）では出品できない' do
+  @item.delivery_day_id = 1
+  @item.valid?
+  expect(@item.errors.full_messages).to include("Delivery day must be other than 1") 
+end
 
     it 'ユーザーが紐づいていなければ出品できない' do
       @item.user = nil
