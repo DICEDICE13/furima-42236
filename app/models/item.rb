@@ -1,8 +1,15 @@
 class Item < ApplicationRecord
   extend ActiveHash::Associations::ActiveRecordExtensions
   belongs_to :user
+    
+
+  
 
   has_one_attached :image
+
+  def sold_out?
+    false
+  end
 
   belongs_to :category
   belongs_to :status
