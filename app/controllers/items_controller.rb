@@ -1,13 +1,15 @@
 class ItemsController < ApplicationController
 
-  before_action :authenticate_user!, only: [:new, :create]
+  before_action :authenticate_user!, only: [:new, :create, :edit, :update]
+  before_action :set_item, only: [:show, :edit, :update]
+  before_action :authorize_owner!, only: [:edit, :update]
+ 
 
   def index
     @items = Item.order(created_at: :desc)
   end
 
   def show
-   @item = Item.find(params[:id])
   end
 
   def new
@@ -27,15 +29,41 @@ class ItemsController < ApplicationController
     end
   end
 
-  # def edit
-  #   @item = Item.find(params[:id])
-  # end
+  def edit
+    set_select_options
+  end
+
+  def update
+    safe_params =
+      if params[:item].key?(:image) && params[:item][:image].blank?
+        item_params.except(:image)
+      else
+        item_params
+      end
+      
+    if @item.update(safe_params)
+      redirect_to item_path(@item), notice: '商品情報を更新しました'
+    else
+      set_select_options
+      render :edit, status: :unprocessable_entity
+    end
+  end
 
   
 
   
   private
 
+  def set_item
+    @item = Item.find(params[:id])
+  end
+
+  def authorize_owner!
+    return if current_user == @item.user
+    redirect_to root_path, alert: '権限がありません'
+  end
+
+  
   
 
   def item_params
