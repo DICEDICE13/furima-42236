@@ -86,3 +86,5 @@ gem 'active_hash'
 
 
 gem "jsbundling-rails", "~> 1.3"
+
+gem 'payjp'
