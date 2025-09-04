@@ -11,7 +11,7 @@ class OrderForm
     validates :prefecture_id, numericality: {other_than: 0, message: "can't be blank"}
     validates :city
     validates :address_line
-    validates :phone_number, format: { with: /\A\d{10,11}\z/,message: "is invalid. Include hyphen(-)"}
+    validates :phone_number, format: { with: /\A\d{10,11}\z/,message: "is invalid"}
     validates :token
     validates :user_id
     validates :item_id
@@ -22,7 +22,7 @@ class OrderForm
   def save
     order = Order.create(user_id: user_id, item_id: item_id)
 
-      # 配送先情報を保存
+      
       ShippingAddress.create(
         postal_code: postal_code,
         prefecture_id: prefecture_id,
