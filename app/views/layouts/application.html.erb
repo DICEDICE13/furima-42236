@@ -7,13 +7,14 @@
   <%= csrf_meta_tags %>
   <%= csp_meta_tag %>
   
-  <script src="https://js.pay.jp/v2/pay.js" async></script>
-  <%= javascript_include_tag "card", "data-turbo-track": "reload", defer: true %>
+  <script type="text/javascript" src="https://js.pay.jp/v2/pay.js"></script>
 
-
-  <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
-  <%= javascript_importmap_tags %>
   
+
+
+  <%= stylesheet_link_tag "application", media: 'all', "data-turbo-track": "reload" %>
+  <%= javascript_importmap_tags %>
+  <%= include_gon %>
 </head>
 
 <body>

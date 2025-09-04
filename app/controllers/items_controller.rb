@@ -3,10 +3,11 @@ class ItemsController < ApplicationController
   before_action :authenticate_user!, only: [:new, :create, :edit, :update, :destroy]
   before_action :set_item, only: [:show, :edit, :update, :destroy]
   before_action :authorize_owner!, only: [:edit, :update, :destroy]
+  before_action :redirect_if_sold_out, only: [:edit, :update]
  
 
   def index
-    @items = Item.order(created_at: :desc)
+    @items = Item.includes(:order).order(created_at: :desc)
   end
 
   def show
@@ -88,6 +89,13 @@ class ItemsController < ApplicationController
     @prefectures = Prefecture.all
     @delivery_days = DeliveryDay.all
   end
+
+  def redirect_if_sold_out
+    item = Item.find(params[:id])
+    if item.order.present?
+      redirect_to root_path
+    end
+  end 
 
   
 

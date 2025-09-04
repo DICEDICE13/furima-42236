@@ -4,40 +4,36 @@
 <div class="item-show">
   <div class="item-box">
     <h2 class="name">
-  <%= @item.name %>
-</h2>
+      <%= "商品名" %>
+    </h2>
+    <div class="item-img-content">
+      <%= image_tag @item.image ,class:"item-box-img" %>
+  
+      <% if @item.order.present? %>
+      <div class="sold-out">
+        <span>Sold Out!!</span>
+      </div>
+      <% end %>
+     
+    </div>
+    <div class="item-price-box">
+      <span class="item-price">
+       <%= number_with_delimiter(@item.price) %>
+      </span>
+      <span class="item-postage">
+        <%= "配送料負担" %>
+      </span>
+    </div>
 
-<div class="item-img-content">
-  <% if @item.image.attached? %>
-    <%= image_tag @item.image, class:"item-box-img" %>
-  <% else %>
-    <%= image_tag "item-sample.png", class:"item-box-img" %>
-  <% end %>
-</div>
-
-<div class="item-price-box">
-  <span class="item-price">
-    ¥ <%= number_with_delimiter(@item.price) %>
-  </span>
-  <span class="item-postage">
-    <%= @item.shipping_fee_status.name %>
-  </span>
-</div>
-
-    
-  <% if user_signed_in? %>
-    <% if current_user == @item.user %>
-      <%= link_to "商品の編集", edit_item_path(@item), method: :get, class: "item-red-btn" %>
-      <p class="or-text">or</p>
-      <%= link_to "削除", item_path, data: {turbo_method: :delete}, class:"item-destroy" %>
-
-    <% elsif current_user != @item.user %>
-
-    <%# 商品が売れていない場合はこちらを表示しましょう %>
-    <%= link_to "購入画面に進む", item_orders_path(@item), data: { turbo: false }, class:"item-red-btn"%>
-    <%# //商品が売れていない場合はこちらを表示しましょう %>
+    <% if user_signed_in? && @item.order.nil? %>
+      <% if current_user.id == @item.user_id %>
+        <%= link_to "商品の編集", edit_item_path(@item), method: :get, class: "item-red-btn" %>
+        <p class="or-text">or</p>
+        <%= link_to "削除", item_path(@item), data: {turbo_method: :delete}, class:"item-destroy" %>
+      <% else %>
+        <%= link_to "購入画面に進む", item_orders_path(@item) ,data: { turbo: false }, class:"item-red-btn"%>
+      <% end %>
     <% end %>
-  <% end %>
 
    <div class="item-explain-box">
       <span><%= @item.description %></span>

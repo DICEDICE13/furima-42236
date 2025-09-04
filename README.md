@@ -24,7 +24,7 @@
 | name	             | string     |	null: false                     |
 | description        | text       |	null: false                     |
 | category_id	       | integer    |	null: false                     |
-| shipping-fee-status_id   | integer    |	null: false                     |
+| shipping_fee_status_id   | integer    |	null: false                     |
 | price	             | integer    |	null: false                     |
 | user	             | references |	null: false,foreign_key: true   |
 | status_id	         | integer    | null: false                     |
@@ -59,7 +59,7 @@
 | address_line	     | string	    | null: false                     |
 | building_name      | string	    |                                 |
 | phone_number       | string	    | null: false                     |
-| order              | references | null: false, foreign_key: true  |
+| order_id           | references | null: false, foreign_key: true  |
 
 ### Association
 - belongs_to :order

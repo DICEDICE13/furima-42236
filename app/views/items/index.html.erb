@@ -122,30 +122,24 @@
 
   <%# 商品一覧 %>
 <div class='item-contents'>
-  <h2 class='title'>ピックアップカテゴリー</h2>
-  <div class="subtitle">
-    新規投稿商品
-  </div>
-  <ul class='item-lists'>
-    <% if @items.any? %>
-      <% @items.each do |item| %>
-        <li class='list'>
-          <%= link_to item_path(item) do %>
-            <div class='item-img-content'>
-              <%# 画像があれば表示、なければサンプル画像 %>
-              <% if item.image.attached? %>
-                <%= image_tag item.image, class: "item-img" %>
-              <% else %>
-                <%= image_tag "item-sample.png", class: "item-img" %>
-              <% end %>
+    <h2 class='title'>ピックアップカテゴリー</h2>
+    <div class="subtitle" >
+      新規投稿商品
+    </div>
+    <ul class='item-lists'>
 
-              <%# 商品が売れていれば sold out を表示 %>
-              <%# <% if item.sold_out? %>
-                <%# <div class='sold-out'> %>
-                  <%# <span>Sold Out!!</span> %>
-                <%# </div> %>
-              <%# <% end %>
-            </div>
+      <% @items.each do |item| %>
+      <li class='list'>
+        <%= link_to item_path(item) do %>
+        <div class='item-img-content'>
+          <%= image_tag item.image, class: "item-img" if item.image.attached? %>
+
+          <% if item.order.present? %>
+          <div class='sold-out'>
+            <span>Sold Out!!</span>
+          </div>
+          <% end %>
+        </div>
 
             <div class='item-info'>
               <h3 class='item-name'>
@@ -163,10 +157,11 @@
               </div>
             </div>
           <% end %>
+          <% end %> 
         </li>
-      <% end %>
-    <% else %>
-      <%# 商品が無い場合のダミー商品表示 %>
+      
+    
+      <% if @items == [] %>
       <li class='list'>
         <%= link_to '#' do %>
           <%= image_tag "https://tech-master.s3.amazonaws.com/uploads/curriculums/images/Rails1-4/sample.jpg", class: "item-img" %>
@@ -181,11 +176,11 @@
                 <span class='star-count'>0</span>
               </div>
             </div>
-          </div>
+        <% end %>    
+        </div>
         <% end %>
       </li>
-    <% end %>
-  </ul>
+    </ul>
 </div>
 <%# /商品一覧 %>
 
