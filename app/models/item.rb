@@ -8,7 +8,7 @@ class Item < ApplicationRecord
   has_one_attached :image
 
   def sold_out?
-    false
+    order.present?
   end
 
   belongs_to :category
