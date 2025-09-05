@@ -84,9 +84,6 @@ gem 'rspec-rails', '~> 4.0.0'
 
 gem 'active_hash'
 
-
-gem "jsbundling-rails", "~> 1.3"
-
 gem 'payjp'
 
 gem 'gon'
