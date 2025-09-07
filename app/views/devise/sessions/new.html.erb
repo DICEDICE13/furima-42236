@@ -1,3 +1,5 @@
+<%= render "shared/second-header"%>
+
 <%= form_with scope: :user, url: user_session_path, local: true, class: 'registration-main' do |f| %>
 
   <div class='form-wrap'>
@@ -27,3 +29,5 @@
     </div>
   </div>
 <% end %>
+
+<%= render "shared/second-footer"%>
