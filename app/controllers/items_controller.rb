@@ -25,7 +25,6 @@ class ItemsController < ApplicationController
     if @item.save
       redirect_to root_path, notice: '出品が完了しました'
     else
-      puts @item.errors.full_messages.inspect
       set_select_options
       render :new, status: :unprocessable_entity
     end
